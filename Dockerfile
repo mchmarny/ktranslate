@@ -11,9 +11,9 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
     go build -a -tags netgo \
     -ldflags '-w -extldflags "-static"' \
     -mod vendor \
-    -o app
+    -o kcm
 
 # RUN
 FROM gcr.io/distroless/static
-COPY --from=builder /src/app .
-ENTRYPOINT ["/app"]
+COPY --from=builder /src/kcm .
+ENTRYPOINT ["/kcm"]
