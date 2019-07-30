@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"strings"
 
 	ce "github.com/cloudevents/sdk-go"
 	ev "github.com/mchmarny/gcputil/env"
@@ -62,10 +63,10 @@ func (r *eventReceiver) Receive(ctx context.Context, event ce.Event, resp *ce.Ev
 	}
 
 	// set the extension
-	event.SetExtension("translation", map[string]string{
-		"original": textValue,
-		"result":   translatedText,
-	})
+	event.SetExtension("translation", translatedText)
+
+	// reset the event type
+	event.SetType(strings.Trim(event.Type(), ".noneng"))
 
 	log.Printf("Translated event: %v", event.Context)
 	resp.RespondWith(200, &event)

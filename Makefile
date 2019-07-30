@@ -12,7 +12,7 @@ mod:
 image: mod
 	gcloud builds submit \
 		--project cloudylabs-public \
-		--tag gcr.io/cloudylabs-public/tranlator:0.1.1
+		--tag gcr.io/cloudylabs-public/tranlator:0.3.2
 
 # DEPLOYMENT
 service:
